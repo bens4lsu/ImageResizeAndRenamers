@@ -8,5 +8,12 @@
 
 import Foundation
 
-print("Hello, World!")
-
+let fileCollection = FileCollection()
+for file in fileCollection.imageFiles {
+    guard let creationDate = file.creationDateFromMetadata() else {
+        print("Content Creation Metadata not found for file \(file).")
+        break
+    }
+    let newFileName = "IMG_" + creationDate + file.seqNumbers() + ".jpg"
+    file.rename(to: newFileName)
+}

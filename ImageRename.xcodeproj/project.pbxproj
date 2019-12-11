@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B5A417FC239AAD85007A8AD2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A417FB239AAD85007A8AD2 /* main.swift */; };
+		B5A41803239AADEB007A8AD2 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41802239AADEB007A8AD2 /* ImageFile.swift */; };
+		B5A41805239AAF30007A8AD2 /* FileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41804239AAF30007A8AD2 /* FileCollection.swift */; };
+		B5A41807239AB04F007A8AD2 /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		B5A417F8239AAD85007A8AD2 /* ImageRename */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageRename; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A417FB239AAD85007A8AD2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B5A41802239AADEB007A8AD2 /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
+		B5A41804239AAF30007A8AD2 /* FileCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCollection.swift; sourceTree = "<group>"; };
+		B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSRegularExpressionExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				B5A417FB239AAD85007A8AD2 /* main.swift */,
+				B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */,
+				B5A41802239AADEB007A8AD2 /* ImageFile.swift */,
+				B5A41804239AAF30007A8AD2 /* FileCollection.swift */,
 			);
 			path = ImageRename;
 			sourceTree = "<group>";
@@ -89,7 +98,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1120;
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = com.concordbusinessservicesllc;
 				TargetAttributes = {
 					B5A417F7239AAD85007A8AD2 = {
@@ -121,6 +130,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5A417FC239AAD85007A8AD2 /* main.swift in Sources */,
+				B5A41807239AB04F007A8AD2 /* NSRegularExpressionExtension.swift in Sources */,
+				B5A41805239AAF30007A8AD2 /* FileCollection.swift in Sources */,
+				B5A41803239AADEB007A8AD2 /* ImageFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +255,7 @@
 		B5A41800239AAD85007A8AD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YE7E9G4GE;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -254,6 +267,7 @@
 		B5A41801239AAD85007A8AD2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YE7E9G4GE;
 				ENABLE_HARDENED_RUNTIME = YES;
