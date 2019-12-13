@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50517FF23A30629006E79DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50517FE23A30629006E79DE /* main.swift */; };
+		B505180423A30702006E79DE /* NSRegularExpressionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */; };
+		B505180523A30702006E79DE /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41802239AADEB007A8AD2 /* ImageFile.swift */; };
+		B505180623A30702006E79DE /* FileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41804239AAF30007A8AD2 /* FileCollection.swift */; };
+		B505180823A30B4C006E79DE /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180723A30B4C006E79DE /* NSImageExtension.swift */; };
+		B505180A23A3CC07006E79DE /* ResizeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180923A3CC07006E79DE /* ResizeSettings.swift */; };
+		B505180B23A3D1A8006E79DE /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180723A30B4C006E79DE /* NSImageExtension.swift */; };
 		B5A417FC239AAD85007A8AD2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A417FB239AAD85007A8AD2 /* main.swift */; };
 		B5A41803239AADEB007A8AD2 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41802239AADEB007A8AD2 /* ImageFile.swift */; };
 		B5A41805239AAF30007A8AD2 /* FileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41804239AAF30007A8AD2 /* FileCollection.swift */; };
@@ -14,6 +21,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B50517FA23A30629006E79DE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		B5A417F6239AAD85007A8AD2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -26,6 +42,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B50517FC23A30629006E79DE /* ImageScaleAndJpg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageScaleAndJpg; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50517FE23A30629006E79DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B505180723A30B4C006E79DE /* NSImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtension.swift; sourceTree = "<group>"; };
+		B505180923A3CC07006E79DE /* ResizeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeSettings.swift; sourceTree = "<group>"; };
 		B5A417F8239AAD85007A8AD2 /* ImageRename */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageRename; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A417FB239AAD85007A8AD2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B5A41802239AADEB007A8AD2 /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
@@ -34,6 +54,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B50517F923A30629006E79DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5A417F5239AAD85007A8AD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -44,10 +71,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B50517FD23A30629006E79DE /* ImageScaleAndJpg */ = {
+			isa = PBXGroup;
+			children = (
+				B50517FE23A30629006E79DE /* main.swift */,
+				B505180923A3CC07006E79DE /* ResizeSettings.swift */,
+			);
+			path = ImageScaleAndJpg;
+			sourceTree = "<group>";
+		};
+		B505180323A3069A006E79DE /* FileTaskCommon */ = {
+			isa = PBXGroup;
+			children = (
+				B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */,
+				B505180723A30B4C006E79DE /* NSImageExtension.swift */,
+				B5A41804239AAF30007A8AD2 /* FileCollection.swift */,
+				B5A41802239AADEB007A8AD2 /* ImageFile.swift */,
+			);
+			path = FileTaskCommon;
+			sourceTree = "<group>";
+		};
 		B5A417EF239AAD85007A8AD2 = {
 			isa = PBXGroup;
 			children = (
+				B505180323A3069A006E79DE /* FileTaskCommon */,
 				B5A417FA239AAD85007A8AD2 /* ImageRename */,
+				B50517FD23A30629006E79DE /* ImageScaleAndJpg */,
 				B5A417F9239AAD85007A8AD2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B5A417F8239AAD85007A8AD2 /* ImageRename */,
+				B50517FC23A30629006E79DE /* ImageScaleAndJpg */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,9 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				B5A417FB239AAD85007A8AD2 /* main.swift */,
-				B5A41806239AB04F007A8AD2 /* NSRegularExpressionExtension.swift */,
-				B5A41802239AADEB007A8AD2 /* ImageFile.swift */,
-				B5A41804239AAF30007A8AD2 /* FileCollection.swift */,
 			);
 			path = ImageRename;
 			sourceTree = "<group>";
@@ -74,6 +121,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B50517FB23A30629006E79DE /* ImageScaleAndJpg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B505180223A30629006E79DE /* Build configuration list for PBXNativeTarget "ImageScaleAndJpg" */;
+			buildPhases = (
+				B50517F823A30629006E79DE /* Sources */,
+				B50517F923A30629006E79DE /* Frameworks */,
+				B50517FA23A30629006E79DE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageScaleAndJpg;
+			productName = ImageScaleAndJpg;
+			productReference = B50517FC23A30629006E79DE /* ImageScaleAndJpg */;
+			productType = "com.apple.product-type.tool";
+		};
 		B5A417F7239AAD85007A8AD2 /* ImageRename */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5A417FF239AAD85007A8AD2 /* Build configuration list for PBXNativeTarget "ImageRename" */;
@@ -97,10 +161,13 @@
 		B5A417F0239AAD85007A8AD2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1120;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = com.concordbusinessservicesllc;
 				TargetAttributes = {
+					B50517FB23A30629006E79DE = {
+						CreatedOnToolsVersion = 11.3;
+					};
 					B5A417F7239AAD85007A8AD2 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
@@ -120,11 +187,25 @@
 			projectRoot = "";
 			targets = (
 				B5A417F7239AAD85007A8AD2 /* ImageRename */,
+				B50517FB23A30629006E79DE /* ImageScaleAndJpg */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B50517F823A30629006E79DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B505180B23A3D1A8006E79DE /* NSImageExtension.swift in Sources */,
+				B505180423A30702006E79DE /* NSRegularExpressionExtension.swift in Sources */,
+				B505180A23A3CC07006E79DE /* ResizeSettings.swift in Sources */,
+				B505180523A30702006E79DE /* ImageFile.swift in Sources */,
+				B505180623A30702006E79DE /* FileCollection.swift in Sources */,
+				B50517FF23A30629006E79DE /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5A417F4239AAD85007A8AD2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +213,7 @@
 				B5A417FC239AAD85007A8AD2 /* main.swift in Sources */,
 				B5A41807239AB04F007A8AD2 /* NSRegularExpressionExtension.swift in Sources */,
 				B5A41805239AAF30007A8AD2 /* FileCollection.swift in Sources */,
+				B505180823A30B4C006E79DE /* NSImageExtension.swift in Sources */,
 				B5A41803239AADEB007A8AD2 /* ImageFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +221,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		B505180023A30629006E79DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4YE7E9G4GE;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		B505180123A30629006E79DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4YE7E9G4GE;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		B5A417FD239AAD85007A8AD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -246,6 +350,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -271,6 +376,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4YE7E9G4GE;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -279,6 +385,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B505180223A30629006E79DE /* Build configuration list for PBXNativeTarget "ImageScaleAndJpg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B505180023A30629006E79DE /* Debug */,
+				B505180123A30629006E79DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5A417F3239AAD85007A8AD2 /* Build configuration list for PBXProject "ImageRename" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

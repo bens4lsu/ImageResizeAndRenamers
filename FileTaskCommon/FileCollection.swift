@@ -122,7 +122,7 @@ class FileCollection{
         case let .fileNameRegex(regex):
             files = getFileListing(matchingRegex: regex)
         case .help:
-            print (CommandLineOption.usage)
+            NSLog (CommandLineOption.usage)
             files = nil
         case .invalid:
             files = nil
