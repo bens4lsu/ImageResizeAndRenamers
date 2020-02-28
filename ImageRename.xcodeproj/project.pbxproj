@@ -12,6 +12,7 @@
 		B505180523A30702006E79DE /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41802239AADEB007A8AD2 /* ImageFile.swift */; };
 		B505180623A30702006E79DE /* FileCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41804239AAF30007A8AD2 /* FileCollection.swift */; };
 		B505180823A30B4C006E79DE /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180723A30B4C006E79DE /* NSImageExtension.swift */; };
+		B505180A23A3CC07006E79DE /* ResizeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180923A3CC07006E79DE /* ResizeSettings.swift */; };
 		B505180B23A3D1A8006E79DE /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B505180723A30B4C006E79DE /* NSImageExtension.swift */; };
 		B5A417FC239AAD85007A8AD2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A417FB239AAD85007A8AD2 /* main.swift */; };
 		B5A41803239AADEB007A8AD2 /* ImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5A41802239AADEB007A8AD2 /* ImageFile.swift */; };
@@ -44,6 +45,7 @@
 		B50517FC23A30629006E79DE /* ImageScaleAndJpg */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageScaleAndJpg; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50517FE23A30629006E79DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B505180723A30B4C006E79DE /* NSImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtension.swift; sourceTree = "<group>"; };
+		B505180923A3CC07006E79DE /* ResizeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizeSettings.swift; sourceTree = "<group>"; };
 		B5A417F8239AAD85007A8AD2 /* ImageRename */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ImageRename; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5A417FB239AAD85007A8AD2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B5A41802239AADEB007A8AD2 /* ImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFile.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				B50517FE23A30629006E79DE /* main.swift */,
+				B505180923A3CC07006E79DE /* ResizeSettings.swift */,
 			);
 			path = ImageScaleAndJpg;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				B505180B23A3D1A8006E79DE /* NSImageExtension.swift in Sources */,
 				B505180423A30702006E79DE /* NSRegularExpressionExtension.swift in Sources */,
+				B505180A23A3CC07006E79DE /* ResizeSettings.swift in Sources */,
 				B505180523A30702006E79DE /* ImageFile.swift in Sources */,
 				B505180623A30702006E79DE /* FileCollection.swift in Sources */,
 				B50517FF23A30629006E79DE /* main.swift in Sources */,

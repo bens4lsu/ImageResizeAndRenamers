@@ -71,13 +71,11 @@ class ImageFile: CustomStringConvertible {
     }
     
     var image: NSImage? {
-        let img = NSImage(contentsOfFile: currentFile) ?? NSImage()
-        return img
+        NSImage(byReferencingFile: currentFile)
     }
     
-    // MARK:  computed properties for image resizing
     var imageOrientation: ImageOrientation? {
-        guard let image = self.image else { return nil }
+        guard let image = image else { return nil }
         if image.size.width > image.size.height * 2 {
             return .panorama
         }
@@ -93,32 +91,13 @@ class ImageFile: CustomStringConvertible {
     }
     
     var resImgURL: URL? {
-        let resFileName = "res" + currentFileNameOnly
-        return URL(string: ("file://" + folder + "/" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
+        let resFileName = "res" + currentFile
+        return URL(string: ("file://" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     var thbImgURL: URL? {
-        let thbFileName = "_thb_res" + currentFileNameOnly
-        return URL(string: ("file://" + folder + "/" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
-    }
-    
-    var resImgRect: NSRect? {
-        guard let image = self.image,
-            let imageOrientation = self.imageOrientation else {
-            return nil
-        }
-        if imageOrientation.resizeFormula.basedOnDimension == .height {
-            let h: CGFloat = imageOrientation.resizeFormula.fullDimension
-            let factor: CGFloat = imageOrientation.resizeFormula.fullDimension / image.size.height
-            let w: CGFloat = factor * image.size.width
-            return NSRect(x: 0, y: 0, width: w, height: h)
-        }
-        else {
-            let w: CGFloat = imageOrientation.resizeFormula.fullDimension
-            let factor: CGFloat = imageOrientation.resizeFormula.fullDimension / image.size.width
-            let h: CGFloat = factor * image.size.height
-            return NSRect(x: 0, y: 0, width: w, height: h)
-        }
+        let thbFileName = "_thb_res" + currentFile
+        return URL(string: ("file://" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     //  to conform with CustomStringConvertible protocol.  description gets used when there's an error -- to print
@@ -186,33 +165,25 @@ class ImageFile: CustomStringConvertible {
         return true
     }
     
-    func resized() -> (CGImage, CGImage)? {
-        guard let image = image,
-            let imageOrientation = imageOrientation
-        else {
+
+    func resized() -> (NSImage, NSImage)? {
+        guard let resImg = NSImage(byReferencingFile: currentFile),
+              let thbImg = NSImage(byReferencingFile: currentFile),
+              let imageOrientation = imageOrientation else {
             print ("Could not convert file \(self) to native image.")
             return nil
         }
-        var resImg: CGImage?
-        var thbImg: CGImage?
         switch imageOrientation.resizeFormula.basedOnDimension {
         case .width:
-            resImg = image.resized(toWidth: imageOrientation.resizeFormula.fullDimension)
-            thbImg = image.resized(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg.resize(toWidth: imageOrientation.resizeFormula.fullDimension)
+            thbImg.resize(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
         case .height:
-            resImg = image.resized(toHeight: imageOrientation.resizeFormula.fullDimension)
-            thbImg = image.resized(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg.resize(toHeight: imageOrientation.resizeFormula.fullDimension)
+            thbImg.resize(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
         }
-        if resImg != nil && thbImg != nil {
-            return (resImg!, thbImg!)
-        }
-        else {
-            print ("Error resizing images")
-            return nil
-        }
+        return (resImg, thbImg)
     }
     
-
     func saveResizedCopies() -> Bool {
         guard let (resImg, thbImg) = resized(),
               let resImgURL = resImgURL,
@@ -226,13 +197,4 @@ class ImageFile: CustomStringConvertible {
         return success
     }
     
-}
-
-extension CGImage {
-    
-    
-    func jpgWrite(to url: URL) -> Bool {
-        let destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, nil);
-        self.
-    }
 }
