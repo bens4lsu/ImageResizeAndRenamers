@@ -88,7 +88,7 @@ class ImageFile: CustomStringConvertible {
             return .square
         }
         else {
-            return .other
+            return .portrait
         }
     }
     
@@ -186,15 +186,15 @@ class ImageFile: CustomStringConvertible {
         return true
     }
     
-    func resized() -> (NSImage, NSImage)? {
+    func resized() -> (CGImage, CGImage)? {
         guard let image = image,
             let imageOrientation = imageOrientation
         else {
             print ("Could not convert file \(self) to native image.")
             return nil
         }
-        var resImg: NSImage
-        var thbImg: NSImage
+        var resImg: CGImage?
+        var thbImg: CGImage?
         switch imageOrientation.resizeFormula.basedOnDimension {
         case .width:
             resImg = image.resized(toWidth: imageOrientation.resizeFormula.fullDimension)
@@ -203,7 +203,13 @@ class ImageFile: CustomStringConvertible {
             resImg = image.resized(toHeight: imageOrientation.resizeFormula.fullDimension)
             thbImg = image.resized(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
         }
-        return (resImg, thbImg)
+        if resImg != nil && thbImg != nil {
+            return (resImg!, thbImg!)
+        }
+        else {
+            print ("Error resizing images")
+            return nil
+        }
     }
     
 
@@ -218,5 +224,15 @@ class ImageFile: CustomStringConvertible {
         var success = resImg.jpgWrite(to: resImgURL)
         success = success && thbImg.jpgWrite(to: thbImgURL)
         return success
+    }
+    
+}
+
+extension CGImage {
+    
+    
+    func jpgWrite(to url: URL) -> Bool {
+        let destination = CGImageDestinationCreateWithURL(url, kUTTypePNG, 1, nil);
+        self.
     }
 }
