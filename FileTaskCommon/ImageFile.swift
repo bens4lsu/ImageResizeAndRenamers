@@ -91,12 +91,12 @@ class ImageFile: CustomStringConvertible {
     }
     
     var resImgURL: URL? {
-        let resFileName = "res" + currentFile
+        let resFileName = folder + "/res" + currentFileNameOnly
         return URL(string: ("file://" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     var thbImgURL: URL? {
-        let thbFileName = "_thb_res" + currentFile
+        let thbFileName = folder + "/_thb_res" + currentFileNameOnly
         return URL(string: ("file://" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
@@ -167,19 +167,21 @@ class ImageFile: CustomStringConvertible {
     
 
     func resized() -> (NSImage, NSImage)? {
-        guard let resImg = NSImage(byReferencingFile: currentFile),
-              let thbImg = NSImage(byReferencingFile: currentFile),
-              let imageOrientation = imageOrientation else {
+        guard let image = self.image, let imageOrientation = imageOrientation else {
             print ("Could not convert file \(self) to native image.")
             return nil
         }
+        
+        var resImg: NSImage
+        var thbImg: NSImage
+        
         switch imageOrientation.resizeFormula.basedOnDimension {
         case .width:
-            resImg.resize(toWidth: imageOrientation.resizeFormula.fullDimension)
-            thbImg.resize(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg = image.resized(toWidth: imageOrientation.resizeFormula.fullDimension)
+            thbImg = image.resized(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
         case .height:
-            resImg.resize(toHeight: imageOrientation.resizeFormula.fullDimension)
-            thbImg.resize(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg = image.resized(toHeight: imageOrientation.resizeFormula.fullDimension)
+            thbImg = image.resized(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
         }
         return (resImg, thbImg)
     }
