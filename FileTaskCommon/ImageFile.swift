@@ -61,16 +61,23 @@ class ImageFile: CustomStringConvertible {
         (currentFile as NSString).deletingLastPathComponent.replacingOccurrences(of: " ", with: #"%20"#)
     }
     
+    var currentFileNameOnly: String {
+        currentFile.replacingOccurrences(of: " ", with: #"%20"#)
+                   .replacingOccurrences(of: folder + "/", with: "")
+    }
+    
     var currentFileURL: URL? {
         URL(string: ("file://" + currentFile).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     var image: NSImage? {
-        NSImage(byReferencingFile: currentFile)
+        let img = NSImage(contentsOfFile: currentFile) ?? NSImage()
+        return img
     }
     
+    // MARK:  computed properties for image resizing
     var imageOrientation: ImageOrientation? {
-        guard let image = image else { return nil }
+        guard let image = self.image else { return nil }
         if image.size.width > image.size.height * 2 {
             return .panorama
         }
@@ -86,13 +93,32 @@ class ImageFile: CustomStringConvertible {
     }
     
     var resImgURL: URL? {
-        let resFileName = "res" + currentFile
-        return URL(string: ("file://" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
+        let resFileName = "res" + currentFileNameOnly
+        return URL(string: ("file://" + folder + "/" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     var thbImgURL: URL? {
-        let thbFileName = "_thb_res" + currentFile
-        return URL(string: ("file://" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
+        let thbFileName = "_thb_res" + currentFileNameOnly
+        return URL(string: ("file://" + folder + "/" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
+    }
+    
+    var resImgRect: NSRect? {
+        guard let image = self.image,
+            let imageOrientation = self.imageOrientation else {
+            return nil
+        }
+        if imageOrientation.resizeFormula.basedOnDimension == .height {
+            let h: CGFloat = imageOrientation.resizeFormula.fullDimension
+            let factor: CGFloat = imageOrientation.resizeFormula.fullDimension / image.size.height
+            let w: CGFloat = factor * image.size.width
+            return NSRect(x: 0, y: 0, width: w, height: h)
+        }
+        else {
+            let w: CGFloat = imageOrientation.resizeFormula.fullDimension
+            let factor: CGFloat = imageOrientation.resizeFormula.fullDimension / image.size.width
+            let h: CGFloat = factor * image.size.height
+            return NSRect(x: 0, y: 0, width: w, height: h)
+        }
     }
     
     //  to conform with CustomStringConvertible protocol.  description gets used when there's an error -- to print
@@ -161,23 +187,26 @@ class ImageFile: CustomStringConvertible {
     }
     
     func resized() -> (NSImage, NSImage)? {
-        guard let resImg = NSImage(byReferencingFile: currentFile),
-              let thbImg = NSImage(byReferencingFile: currentFile),
-              let imageOrientation = imageOrientation else {
+        guard let image = image,
+            let imageOrientation = imageOrientation
+        else {
             print ("Could not convert file \(self) to native image.")
             return nil
         }
+        var resImg: NSImage
+        var thbImg: NSImage
         switch imageOrientation.resizeFormula.basedOnDimension {
         case .width:
-            resImg.resize(toWidth: imageOrientation.resizeFormula.fullDimension)
-            thbImg.resize(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg = image.resized(toWidth: imageOrientation.resizeFormula.fullDimension)
+            thbImg = image.resized(toWidth: imageOrientation.resizeFormula.thumbnailDimension)
         case .height:
-            resImg.resize(toHeight: imageOrientation.resizeFormula.fullDimension)
-            thbImg.resize(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
+            resImg = image.resized(toHeight: imageOrientation.resizeFormula.fullDimension)
+            thbImg = image.resized(toHeight: imageOrientation.resizeFormula.thumbnailDimension)
         }
         return (resImg, thbImg)
     }
     
+
     func saveResizedCopies() -> Bool {
         guard let (resImg, thbImg) = resized(),
               let resImgURL = resImgURL,

@@ -10,35 +10,28 @@ import Foundation
 import AppKit
 extension NSImage {
  
-    func resize(toWidth width:CGFloat) {
+    func resized(toWidth width:CGFloat) -> NSImage {
         // calculate how mch we need to bring the width down to meet our target size
         let scale = width / self.size.width
         let height = self.size.height * scale
-        resize(toSize: CGSize(width: width, height: height))
+        return resized(toSize: CGSize(width: width, height: height))
     }
     
-    func resize(toHeight height:CGFloat) {
+    func resized(toHeight height:CGFloat) -> NSImage {
         let scale = height / self.size.height
         let width = self.size.width * scale
-        resize(toSize: CGSize(width: width, height: height))
+        return resized(toSize: CGSize(width: width, height: height))
     }
     
-    func resize(toSize targetSize: CGSize) {
-        let image = self
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-        } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        }
-        self.size = newSize
+    func resized (toSize targetSize: CGSize) -> NSImage {
+        var newImage = NSImage(size: targetSize)
+        newImage.lockFocus()
+        self.draw(in: NSMakeRect(0, 0, targetSize.width, targetSize.height), from: NSMakeRect(0, 0, self.size.width, self.size.height), operation: NSCompositingOperation.sourceOver, fraction: CGFloat(1))
+        newImage.unlockFocus()
+        newImage.size = targetSize
+        return NSImage(data: newImage.tiffRepresentation!)!
     }
+    
     
     var jpgData: Data? {
         guard let tiffRepresentation = tiffRepresentation,
@@ -49,7 +42,7 @@ extension NSImage {
     func jpgWrite(to url: URL) -> Bool {
         let options = Data.WritingOptions.atomic
         do {
-            try jpgData?.write(to: url, options: options)
+            try self.jpgData?.write(to: url, options: options)
             return true
         } catch {
             print(error)
