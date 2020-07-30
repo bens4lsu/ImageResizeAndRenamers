@@ -57,13 +57,20 @@ class ImageFile: CustomStringConvertible {
     
     
     // MARK: computed properties
-    var folder: String {
-        (currentFile as NSString).deletingLastPathComponent.replacingOccurrences(of: " ", with: #"%20"#)
+    
+    var folderRelative: String {
+        (currentFile as NSString).deletingLastPathComponent.replacingOccurrences(of: " ", with: #"%20"#) + "/"
+    }
+    
+    var folderAbsolute: String {
+        let fullPath = URL(fileURLWithPath: currentFile).absoluteURL.path
+        return (fullPath as NSString).deletingLastPathComponent.replacingOccurrences(of: " ", with: #"%20"#)
     }
     
     var currentFileNameOnly: String {
         currentFile.replacingOccurrences(of: " ", with: #"%20"#)
-                   .replacingOccurrences(of: folder + "/", with: "")
+                   .replacingOccurrences(of: folderAbsolute + "/", with: "")
+            .replacingOccurrences(of: folderRelative, with: "")
     }
     
     var currentFileURL: URL? {
@@ -91,12 +98,12 @@ class ImageFile: CustomStringConvertible {
     }
     
     var resImgURL: URL? {
-        let resFileName = folder + "/res" + currentFileNameOnly
+        let resFileName = folderAbsolute + "/res" + currentFileNameOnly
         return URL(string: ("file://" + resFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
     var thbImgURL: URL? {
-        let thbFileName = folder + "/_thb_res" + currentFileNameOnly
+        let thbFileName = folderAbsolute + "/_thb_res" + currentFileNameOnly
         return URL(string: ("file://" + thbFileName).replacingOccurrences(of: " ", with: #"%20"#))
     }
     
@@ -124,11 +131,15 @@ class ImageFile: CustomStringConvertible {
     
 
     private func seqNumbers(butNot omitString: String? = nil) -> String {
-        let myFileParts = currentFile.split { $0 == "_" || $0 == "." }
-                                .compactMap { Int($0) }
+        let myFileParts = currentFileNameOnly.split { $0 == "_" || $0 == "." }
+                                //.compactMap { Int($0) }
                                 .map { String($0) }
         if let omitString = omitString {
-            return myFileParts.joined(separator: "_").replacingOccurrences(of: omitString, with: "")
+            return myFileParts.joined(separator: "_")
+                .replacingOccurrences(of: omitString, with: "")
+                .replacingOccurrences(of: "_jpeg", with: "")
+                .replacingOccurrences(of: "_jpg", with: "")
+                                                    
         }
         else {
             return myFileParts.joined(separator: "_")
@@ -147,12 +158,12 @@ class ImageFile: CustomStringConvertible {
     
     func rename(to desitnatonFileName: String) -> Bool{
         guard let originURL = currentFileURL,
-            let destinationURL = URL(string: "file://" + folder + "/" + desitnatonFileName)
+            let destinationURL = URL(string: "file://" + folderAbsolute + "/" + desitnatonFileName)
             else {
                 print ("""
                     Error with a file URL.
                     originFilePath: \(currentFile)
-                    destinationFilePath: \("file://" + folder + "/" + desitnatonFileName)
+                    destinationFilePath: \("file://" + folderAbsolute + "/" + desitnatonFileName)
                     """)
                 return false
         }
@@ -186,17 +197,19 @@ class ImageFile: CustomStringConvertible {
         return (resImg, thbImg)
     }
     
-    func saveResizedCopies() -> Bool {
+    func saveResizedCopies() -> (Bool, String?) {
         guard let (resImg, thbImg) = resized(),
               let resImgURL = resImgURL,
               let thbImgURL = thbImgURL
         else {
             print ("Error creating urls for resized files.")
-            return false
+            return (false, nil)
         }
+        //print ("Folder is \(folderAbsolute) or \(folderRelative)")
+        //print ("Writing thumbnail to \(thbImgURL.path)")
         var success = resImg.jpgWrite(to: resImgURL)
         success = success && thbImg.jpgWrite(to: thbImgURL)
-        return success
+        return (success, "res" + currentFileNameOnly)
     }
     
 }
