@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1130"
+   LastUpgradeVersion = "1310"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Users/ben/Sync/Pictures/Camera - to file/CD405C85-C52C-49A0-9ADE-FCA8E6CDD687-2353-000001A5C4B0FEE0.jpeg"
+            argument = "/Users/ben/Library/CloudStorage/OneDrive-kidderschultz.com/Camera\ -\ to\ file/tn/IMG_20220521_091623_IMG_7970_HEIC.jpg"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

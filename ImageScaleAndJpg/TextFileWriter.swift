@@ -11,9 +11,9 @@ import Foundation
 class TextFileWriter {
     
     func writePicDesc(in folder: String, from files: [String]){
-        let picUrl = URL(fileURLWithPath: folder + "pic-desc.txt")
+        let picUrl = folder + "pic-desc.txt"
         do {
-            try picDescText(from: files).write(to: picUrl, atomically: true, encoding: String.Encoding.utf8)
+            try picDescText(from: files).write(toFile: picUrl, atomically: true, encoding: String.Encoding.utf8)
         }
         catch {
             print ("Error writing pic-desc to disk:  \(error)")
@@ -21,12 +21,12 @@ class TextFileWriter {
     }
     
     func writeGalDesc(in folder: String) {
-        let picUrl = URL(fileURLWithPath: folder + "gal-desc.txt")
+        let picUrl = folder + "gal-desc.txt"
         do {
-            try galDescText().write(to: picUrl, atomically: true, encoding: String.Encoding.utf8)
+            try galDescText().write(toFile: picUrl, atomically: true, encoding: String.Encoding.utf8)
         }
         catch {
-            print ("Error writing gal-desc to disk:  \(error)\nfolder: \(folder)")
+            print ("Error writing gal-desc to disk:  \(error)\nfile: \(picUrl)")
         }
     }
     

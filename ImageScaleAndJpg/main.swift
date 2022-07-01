@@ -25,7 +25,7 @@ if fileCollection.imageFiles.count > 0 {
     }
     print (success ? "All files renamed succesfully" : "At least one file write had a problem")
     
-    let folder = fileCollection.imageFiles[0].folderAbsolute + "/"
+    let folder = fileCollection.imageFiles[0].folderAbsolutePlain + "/"
     let textFileWriter = TextFileWriter()
     textFileWriter.writeGalDesc(in: folder)
     textFileWriter.writePicDesc(in: folder, from: resizedImages)

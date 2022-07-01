@@ -67,6 +67,11 @@ class ImageFile: CustomStringConvertible {
         return (fullPath as NSString).deletingLastPathComponent.replacingOccurrences(of: " ", with: #"%20"#)
     }
     
+    var folderAbsolutePlain: String {
+        let fullPath = URL(fileURLWithPath: currentFile).absoluteURL.path
+        return (fullPath as NSString).deletingLastPathComponent
+    }
+    
     var currentFileNameOnly: String {
         currentFile.replacingOccurrences(of: " ", with: #"%20"#)
                    .replacingOccurrences(of: folderAbsolute + "/", with: "")

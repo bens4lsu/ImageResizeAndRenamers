@@ -38,7 +38,7 @@ extension NSImage {
             factorForRetinaSample = 1
         }
         
-        let targetSize = CGSize(width: targetSize.width / factorForRetinaSample!, height: targetSize.height / factorForRetinaSample!)
+        let targetSize = NSSize(width: targetSize.width / factorForRetinaSample!, height: targetSize.height / factorForRetinaSample!)
         
         let newImage = NSImage(size: targetSize)
         newImage.lockFocus()
