@@ -157,7 +157,10 @@ class ImageFile: CustomStringConvertible {
             print("Content Creation Metadata not found for file \(self).")
             return false
         }
-        let newFileName = "IMG_" + creationDate + "_" + seqNumbers(butNot: creationDate) + ".jpg"
+        var newFileName = ("IMG_" + creationDate + "_" + seqNumbers(butNot: creationDate) + ".jpg")
+            .replacingOccurrences(of: " ", with: "_")
+            .replacingOccurrences(of: "(", with: "_")
+            .replacingOccurrences(of: ")", with: "_")
         return rename(to: newFileName)
     }
     
